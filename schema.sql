@@ -44,7 +44,7 @@ CREATE TABLE "public"."orders" (
   requiredDate DATE NOT NULL,
   shippedDate DATE NULL,
   shipperID INT NOT NULL,
-  freight DOUBLE PRECISION NOT NULL,
+  freight NUMERIC NOT NULL,
   constraint "orders_pkey" primary key (orderID),
   constraint "orders_customerID_fkey" foreign key (customerID) references "public"."customers" (customerID),
   constraint "orders_employeeID_fkey" foreign key (employeeID) references "public"."employees" (employeeID),
@@ -55,8 +55,8 @@ CREATE TABLE "public"."products" (
   productID INT not null,
   productName VARCHAR(255) null,
   quantityPerUnit VARCHAR(255) null,
-  unitPrice DOUBLE PRECISION null,
-  discontinued DOUBLE PRECISION null,
+  unitPrice NUMERIC null,
+  discontinued NUMERIC null,
   categoryID INT null,
   constraint "product_pkey" primary key (productID),
   constraint "products_categoryID_fkey" foreign key (categoryID) references "public"."categories" (categoryID)
@@ -65,9 +65,9 @@ CREATE TABLE "public"."products" (
 CREATE TABLE "public"."order_details" (
   orderID INT not null,
   productID INT not null,
-  unitPrice DOUBLE PRECISION not null,
+  unitPrice NUMERIC not null,
   quantity INT not null,
-  discount DOUBLE PRECISION not null,
+  discount NUMERIC not null,
   constraint "order_details_orderID_fkey" foreign key (orderID) references "public"."orders" (orderID),
   constraint "order_details_productID_fkey" foreign key (productID) references "public"."products" (productID)
 );
